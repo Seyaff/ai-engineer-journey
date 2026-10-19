@@ -1,0 +1,46 @@
+class Order:
+    def __init__(self, customer):
+        self.customer = customer
+        self.items = []
+     
+
+    def add_item(self, name, price, qty=1):
+        
+        order_dict = {"name" : name , "price" : price , "qty" : qty}
+        self.items.append(order_dict)
+       
+    
+
+    def total(self):
+        
+        total_sum = sum(n["price"] * n["qty"] for n in self.items)
+        print(f"sum : {total_sum}")
+        return total_sum
+    
+    def item_count(self):
+       
+        sum_of_qty = sum(n["qty"] for n in self.items)
+        print(sum_of_qty)
+        return sum_of_qty
+   
+    def __repr__(self):
+    
+        return f"Order ({self.customer}, {self.item_count()} items, Rs {self.total()})"
+      
+
+
+o = Order("ali")
+o.add_item("zinger", 450, 2)
+o.add_item("fries", 200)
+
+
+assert o.total() == 1100
+assert o.item_count() == 3
+assert repr(o) == "Order (ali, 3 items, Rs 1100)"
+
+o2 = Order("sara")
+assert o2.total() == 0
+assert o2.item_count() == 0
+assert o.total() == 1100          
+print(o)
+print("All tests passed")
