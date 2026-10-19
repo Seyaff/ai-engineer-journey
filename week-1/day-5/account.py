@@ -4,8 +4,9 @@ class Account:
         self.balance = 0
 
     def deposit(self, amount):
-        if amount >= 0:
-            self.balance += amount
+        if amount <= 0:
+            raise ValueError("bad amount")
+        self.balance += amount
 
     def withdraw(self, amount):
         if amount <= self.balance: 
@@ -34,3 +35,22 @@ assert acc.get_balance() == 0
 other = Account("sara")
 assert other.get_balance() == 0
 print("All tests passed")
+
+
+acc = Account("ali")
+acc.deposit(500)
+assert acc.get_balance() == 500
+
+try:
+    acc.deposit(-100)
+    assert False, "should have raised"
+except ValueError:
+    pass
+assert acc.get_balance() == 500
+
+try:
+    acc.deposit(0)
+    assert False, "should have raised"
+except ValueError:
+    pass
+print("Account tests passed")
