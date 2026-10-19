@@ -16,8 +16,9 @@ class Order:
         return sum_of_qty
 
     def remove_item(self, item_name):
+        before = len(self.items)
         self.items = [n for n in self.items if n["name"] != item_name]
-        return True
+        return len(self.items) < before
 
     def __repr__(self):
 
