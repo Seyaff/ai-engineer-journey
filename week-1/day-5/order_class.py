@@ -38,7 +38,6 @@ o2 = Order("sara")
 assert o2.total() == 0
 assert o2.item_count() == 0
 assert o.total() == 1100
-o.remove_item("fries")
 print(o)
 
 
