@@ -2,31 +2,25 @@ class Order:
     def __init__(self, customer):
         self.customer = customer
         self.items = []
-     
 
     def add_item(self, name, price, qty=1):
-        
-        order_dict = {"name" : name , "price" : price , "qty" : qty}
+        order_dict = {"name": name, "price": price, "qty": qty}
         self.items.append(order_dict)
-       
-    
 
     def total(self):
-        
         total_sum = sum(n["price"] * n["qty"] for n in self.items)
-       
         return total_sum
-    
+
     def item_count(self):
-       
         sum_of_qty = sum(n["qty"] for n in self.items)
-      
         return sum_of_qty
-   
+
+    def remove_item(self, item_name):
+        self.items = [n for n in self.items if n["name"] != item_name]
+
     def __repr__(self):
-    
+
         return f"Order({self.customer}, {self.item_count()} items, Rs {self.total()})"
-      
 
 
 o = Order("ali")
@@ -41,6 +35,7 @@ assert repr(o) == "Order(ali, 3 items, Rs 1100)"
 o2 = Order("sara")
 assert o2.total() == 0
 assert o2.item_count() == 0
-assert o.total() == 1100          
+assert o.total() == 1100
+o.remove_item("fries")
 print(o)
 print("All tests passed")
