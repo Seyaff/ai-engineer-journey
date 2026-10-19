@@ -17,6 +17,7 @@ class Order:
 
     def remove_item(self, item_name):
         self.items = [n for n in self.items if n["name"] != item_name]
+        return True
 
     def __repr__(self):
 
@@ -38,4 +39,16 @@ assert o2.item_count() == 0
 assert o.total() == 1100
 o.remove_item("fries")
 print(o)
+
+
 print("All tests passed")
+
+
+o3 = Order("bilal")
+o3.add_item("zinger", 450, 2)
+o3.add_item("cola", 100)
+assert o3.remove_item("cola") == True
+assert o3.total() == 900
+assert o3.remove_item("pizza") == False
+assert o3.total() == 900
+print("remove_item tests passed")
