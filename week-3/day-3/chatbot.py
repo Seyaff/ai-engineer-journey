@@ -15,7 +15,7 @@ while True:
 
     messages.append({"role": "user", "content": user_input})
 
-    recent = [messages[0]] + messages[-6:]     # rebuilt every turn
+    recent = [messages[0]] + messages[-6:]     
 
     response = client.chat.completions.create(
         model="openai/gpt-oss-120b",
