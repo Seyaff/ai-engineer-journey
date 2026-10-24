@@ -7,14 +7,11 @@ def error(guess) :
     return (guess - 7) * (guess -7)
 
 
-guess = 4
-lr = 0.1
-steps = 0
-
-while error(guess) > 0.0001 and steps < 1000:
-    d = derivative(error, guess)
-    guess = guess - lr * d
-    steps += 1
-    print(steps, round(guess, 4), round(error(guess), 6))
-    
-print(f"Done : {steps} , step guess = {round(guess , 4)}")
+for lr in [0.01, 0.1, 0.3, 0.5, 0.9, 1.0, 1.1]:
+    guess = 4
+    steps = 0
+    while error(guess) > 0.0001 and steps < 1000:
+        d = derivative(error, guess)
+        guess = guess - lr * d
+        steps += 1
+    print("lr =", lr, "| steps:", steps, "| final guess:", round(guess, 4))
