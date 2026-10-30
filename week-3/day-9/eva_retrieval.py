@@ -35,9 +35,10 @@ def rewrite(q):
     r = llm.chat.completions.create(
         model="openai/gpt-oss-120b",
         messages=[
-            {"role": "system", "content": "Fix spelling and rewrite the user's question as a clear, "
-                                          "short question for searching a med spa FAQ. "
-                                          "Return ONLY the rewritten question."},
+            {"role": "system", "content": "Fix spelling and grammar in the user's question. "
+                              "Do NOT change its topic or add any new context. "
+                              "If it is unrelated to a med spa, keep it unrelated. "
+                              "Return ONLY the corrected question."},
             {"role": "user", "content": q},
         ],
     )
@@ -62,7 +63,9 @@ for t in [0.25, 0.30, 0.35, 0.40, 0.45]:
     for q, expected, top_id, score in results:
         if expected is None:
             ok = score < t
+           
         else:
             ok = score >= t and top_id == expected
         correct += ok
     print(f"threshold {t:.2f}: {correct}/{len(results)} correct")
+    
